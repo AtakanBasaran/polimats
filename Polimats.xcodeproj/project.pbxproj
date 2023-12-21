@@ -13,6 +13,7 @@
 		BB26FD7E2B3365D100A1814F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB26FD7C2B3365D100A1814F /* Main.storyboard */; };
 		BB26FD802B3365D200A1814F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB26FD7F2B3365D200A1814F /* Assets.xcassets */; };
 		BB26FD832B3365D200A1814F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB26FD812B3365D200A1814F /* LaunchScreen.storyboard */; };
+		BB51B5EB2B3447CE0057C0C6 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB51B5EA2B3447CE0057C0C6 /* LaunchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		BB26FD7F2B3365D200A1814F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB26FD822B3365D200A1814F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB26FD842B3365D200A1814F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB51B5EA2B3447CE0057C0C6 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				BB26FD762B3365D100A1814F /* AppDelegate.swift */,
 				BB26FD782B3365D100A1814F /* SceneDelegate.swift */,
 				BB26FD7A2B3365D100A1814F /* ViewController.swift */,
+				BB51B5EA2B3447CE0057C0C6 /* LaunchViewController.swift */,
 				BB26FD7C2B3365D100A1814F /* Main.storyboard */,
 				BB26FD7F2B3365D200A1814F /* Assets.xcassets */,
 				BB26FD812B3365D200A1814F /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				BB26FD7B2B3365D100A1814F /* ViewController.swift in Sources */,
 				BB26FD772B3365D100A1814F /* AppDelegate.swift in Sources */,
 				BB26FD792B3365D100A1814F /* SceneDelegate.swift in Sources */,
+				BB51B5EB2B3447CE0057C0C6 /* LaunchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +299,7 @@
 				DEVELOPMENT_TEAM = 27JCDAS664;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Polimats/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Polimats;
+				INFOPLIST_KEY_CFBundleDisplayName = polimats;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -325,7 +329,7 @@
 				DEVELOPMENT_TEAM = 27JCDAS664;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Polimats/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Polimats;
+				INFOPLIST_KEY_CFBundleDisplayName = polimats;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
