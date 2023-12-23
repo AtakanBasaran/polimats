@@ -1,43 +1,65 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate {
-
+class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+    
+    @IBOutlet weak var label: UILabel!
+    
     var webView: WKWebView!
-    let webUrl = "https://polimats.com/"
+    private let webUrl = "https://polimats.com/"
     private var imageView: UIImageView!
     private var imageViewBackground: UIImageView!
-    private var shouldShowAnimation = true
-    private var label: UILabel!
+    private var modeScreen: Bool!
+    private var refreshControl = UIRefreshControl()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        updateBackground()
         setUpBackgroundImage()
         setUpLabel()
         performAnimation()
         loadWebPage()
         setUpBackButton()
         setUpShareButton()
-        navigationItem.leftBarButtonItem?.customView?.isHidden = true
-        navigationItem.rightBarButtonItem?.customView?.isHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
         gestureRecognizer()
-        
-
+        refreshPage()
+      
     }
     
+    //MARK: - Refreshing the page
+    
+    func refreshPage() {
+        refreshControl.addTarget(self, action: #selector(reload), for: .valueChanged)
+        webView.scrollView.refreshControl = refreshControl
+    }
+
+    @objc func reload() {
+        webView.reload()
+    }
     
     //MARK: - Swipe Action
     
     private func gestureRecognizer() {
-        let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_ :)))
-        gestureRecognizer.direction = .right
-        webView.addGestureRecognizer(gestureRecognizer)
+        let gestureRecognizerBack = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeBack(_ :)))
+        gestureRecognizerBack.direction = .right
+        webView.addGestureRecognizer(gestureRecognizerBack)
+        
+        let gestureRecognizerForward = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeForward(_ :)))
+        gestureRecognizerForward .direction = .left
+        webView.addGestureRecognizer(gestureRecognizerForward )
     }
     
-    @objc func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+    @objc private func handleSwipeBack(_ gesture: UISwipeGestureRecognizer) {
         if gesture.direction == .right {
             goBack()
+        }
+    }
+    
+    @objc private func handleSwipeForward(_ gesture: UISwipeGestureRecognizer) {
+        if gesture.direction == .left {
+            goForward()
         }
     }
     
@@ -45,7 +67,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     private func setUpBackgroundImage() {
         
-        imageViewBackground = UIImageView(image: UIImage(named: "white"))
+        imageViewBackground = modeScreen ? UIImageView(image: UIImage(named: "dark")) : UIImageView(image: UIImage(named: "white"))
         imageViewBackground.contentMode = .scaleAspectFill
         imageViewBackground.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageViewBackground)
@@ -65,28 +87,42 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                imageView.widthAnchor.constraint(equalToConstant: 100), // Adjust the width as needed
-                imageView.heightAnchor.constraint(equalToConstant: 100) // Adjust the height as needed
+                imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -imageView.frame.height / 5),
+                imageView.widthAnchor.constraint(equalToConstant: view.bounds.width / 3),
+                imageView.heightAnchor.constraint(equalToConstant: view.bounds.height / 3)
             ])
     }
     
     private func setUpLabel() {
-        label = UILabel()
-        label.text = "Berkeyi sikim"
-        label.textColor = .black
-        label.backgroundColor = .white
+        
+        label.text = "Bildiğinizden daha fazlası"
+        label.textAlignment = .center
+        label.textColor = modeScreen ? .white : .black
+        label.backgroundColor = .none
+        label.numberOfLines = 0
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(label)
-        imageView.bringSubviewToFront(label)
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 60),
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -view.bounds.height / 3)
             ])
         
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateBackground()
+        webView.reload()
+    }
+    
+    private func updateBackground() {
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        modeScreen = userInterfaceStyle == .dark
     }
 
     private func performAnimation() {
@@ -100,12 +136,19 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { //Removing images and animation
+        
         DispatchQueue.main.async {
             self.imageViewBackground.isHidden = true
             self.imageView.isHidden = true
             self.imageView.layer.removeAllAnimations()
+            self.label.isHidden = true
+            self.refreshControl.endRefreshing()
+        }
+        if webView.canGoBack {
+            webView.scrollView.setContentOffset(CGPoint.zero, animated: true)
         }
     }
+    
 
     //MARK: - WebPage Methods
     
@@ -113,9 +156,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
         super.loadView()
         
         let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
         webView.navigationDelegate = self
-        view = webView
+        view.addSubview(webView)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        webView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack), options: .new, context: nil)
     }
 
@@ -123,7 +174,6 @@ class ViewController: UIViewController, WKNavigationDelegate {
         if let url = URL(string: webUrl) {
             let myRequest = URLRequest(url: url)
             webView.load(myRequest)
-//            navigationItem.title = "Polimats"
         }
     }
 
@@ -136,8 +186,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
 
     private func updateBackButtonVisibility(canGoBack: Bool) { //There is no back button in the main page
-        navigationItem.leftBarButtonItem?.customView?.isHidden = !canGoBack
-        navigationItem.rightBarButtonItem?.customView?.isHidden = !canGoBack
+        navigationController?.setNavigationBarHidden(!canGoBack, animated: false)
+
     }
 
     deinit {
@@ -154,11 +204,21 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
     
     @objc private func goBack() {
-        UIView.transition(with: webView, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-            if self.webView.canGoBack {
+    
+        if self.webView.canGoBack {
+            UIView.transition(with: webView, duration: 0.6, options: .transitionFlipFromLeft, animations: {
                 self.webView.goBack()
-            }
-        }, completion: nil)
+            }, completion: nil)
+        }
+    }
+    
+    @objc private func goForward() {
+        
+        if self.webView.canGoForward {
+            UIView.transition(with: webView, duration: 0.6, options: .transitionFlipFromRight, animations: {
+                self.webView.goForward()
+            }, completion: nil)
+        }
     }
     
     private func setUpShareButton() {
@@ -179,6 +239,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
             print("url cannot be retrieved")
         }
     }
+    
     
 
     
