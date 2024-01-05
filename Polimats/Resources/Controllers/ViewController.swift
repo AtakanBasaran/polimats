@@ -1,9 +1,16 @@
 import UIKit
 import WebKit
+import UserNotifications
+import Network
 
-class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var backButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var shareButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var interfaceButton: UIBarButtonItem!
+    @IBOutlet weak var forwardButtonOutlet: UIBarButtonItem!
     
     var webView: WKWebView!
     private let webUrl = "https://polimats.com/"
@@ -11,21 +18,80 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     private var imageViewBackground: UIImageView!
     private var modeScreen: Bool!
     private var refreshControl = UIRefreshControl()
-
-
+    private var toolBar = true
+    var network = Network()
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkConnection()
         updateBackground()
         setUpBackgroundImage()
-        setUpLabel()
+        setUpLabels()
         performAnimation()
         loadWebPage()
-        setUpBackButton()
-        setUpShareButton()
-        navigationController?.setNavigationBarHidden(true, animated: false)
         gestureRecognizer()
         refreshPage()
-      
+        webView.scrollView.delegate = self
+        hideToolbar()
+        backButtonOutlet.isEnabled = false
+        forwardButtonOutlet.isEnabled = false
+        
+    }
+    
+    //MARK: - Check Connection
+    
+    func checkConnection() {
+        
+        network.checkConnection { isConntected in
+            if !isConntected {
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Bağlantı hatası", message: "Sunucuya bağlanılamıyor. İnternet bağlantını kontrol et ve tekrar dene.", preferredStyle: .alert)
+                    let button = UIAlertAction(title: "Tekrar dene", style: .default) { action in
+                        self.restartApp()
+                    }
+                    alertController.addAction(button)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            } else {
+                self.network.monitor.cancel()
+                return
+            }
+        }
+    }
+    
+    //MARK: - Restart the app
+    
+    func restartApp() {
+        if let window = self.view.window {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateInitialViewController()
+            window.rootViewController = viewController
+        }
+    }
+    //MARK: - Scroll view behaviour
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+          hideToolbar()
+       } else {
+           if !toolBar {
+               showToolbar()
+           }
+       }
+    }
+
+    func hideToolbar() {
+        if navigationController?.isToolbarHidden == false {
+            navigationController?.setToolbarHidden(true, animated: true)
+        }
+    }
+
+    func showToolbar() {
+        if navigationController?.isToolbarHidden == true {
+            navigationController?.setToolbarHidden(false, animated: true)
+        }
     }
     
     //MARK: - Refreshing the page
@@ -42,6 +108,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     //MARK: - Swipe Action
     
     private func gestureRecognizer() {
+        
         let gestureRecognizerBack = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeBack(_ :)))
         gestureRecognizerBack.direction = .right
         webView.addGestureRecognizer(gestureRecognizerBack)
@@ -62,8 +129,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             goForward()
         }
     }
-    
-    //MARK: - Loading Screen methods
+    //MARK: - Loading screen methods
     
     private func setUpBackgroundImage() {
         
@@ -80,22 +146,23 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             ])
 
 
-        imageView = UIImageView(image: UIImage(named: "loading"))
+        imageView = modeScreen ? UIImageView(image: UIImage(named: "polimats-white")) : UIImageView(image: UIImage(named: "polimats-black"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         
         NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -imageView.frame.height / 5),
-                imageView.widthAnchor.constraint(equalToConstant: view.bounds.width / 3),
-                imageView.heightAnchor.constraint(equalToConstant: view.bounds.height / 3)
+                imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                imageView.widthAnchor.constraint(equalToConstant: view.bounds.width / 2.5),
+                imageView.heightAnchor.constraint(equalToConstant: view.bounds.height / 2.5)
             ])
     }
     
-    private func setUpLabel() {
+    private func setUpLabels() {
         
-        label.text = "Bildiğinizden daha fazlası"
+        label.text = "polimats.com"
+        label.font = UIFont(name: "Roboto-Bold", size: 18)
         label.textAlignment = .center
         label.textColor = modeScreen ? .white : .black
         label.backgroundColor = .none
@@ -106,25 +173,31 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         view.addSubview(label)
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            label.topAnchor.constraint(equalTo: label2.bottomAnchor),
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -view.bounds.height / 3)
+            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
             ])
         
+        label2.text = "Bildiğinizden daha fazlası"
+        label2.font = UIFont(name: "Roboto-Regular", size: 18)
+        label2.textAlignment = .center
+        label2.textColor = modeScreen ? .white : .black
+        label2.backgroundColor = .none
+        label2.numberOfLines = 0
+        
+        label2.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label2)
+        
+        NSLayoutConstraint.activate([
+            label2.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            label2.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            label2.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            label2.bottomAnchor.constraint(equalTo: label.topAnchor, constant: view.bounds.height / 6)
+            ])
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        updateBackground()
-        webView.reload()
-    }
-    
-    private func updateBackground() {
-        let userInterfaceStyle = traitCollection.userInterfaceStyle
-        modeScreen = userInterfaceStyle == .dark
-    }
-
     private func performAnimation() {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.fromValue = 0.0
@@ -135,6 +208,47 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         imageView.layer.add(rotationAnimation, forKey: nil)
     }
     
+
+    
+    //MARK: - Dark or light mode
+    
+    private func updateBackground() {
+        
+        let userInterfaceStyle = traitCollection.userInterfaceStyle
+        modeScreen = userInterfaceStyle == .dark
+        navigationController?.toolbar.barTintColor = modeScreen ? .black : .white
+        shareButtonOutlet.tintColor = modeScreen ? .white : .systemBlue
+        interfaceButton.tintColor = modeScreen ? .white : .systemBlue
+        interfaceButton.image = UIImage(systemName: "circle.lefthalf.filled")
+
+        if !backButtonOutlet.isEnabled {
+            backButtonOutlet.tintColor = .gray
+        } else {
+            backButtonOutlet.tintColor = modeScreen ? .white : .systemBlue
+        }
+        
+        if !forwardButtonOutlet.isEnabled {
+            forwardButtonOutlet.tintColor = .gray
+        } else {
+            forwardButtonOutlet.tintColor = modeScreen ? .white : .systemBlue
+        }
+        
+    }
+    
+    @IBAction func changeInterface(_ sender: UIBarButtonItem) {
+        if modeScreen {
+            overrideUserInterfaceStyle = .light
+            
+        } else {
+            overrideUserInterfaceStyle = .dark
+        }
+        webView.reload()
+        updateBackground()
+        feedbackGenerator.impactOccurred()
+    }
+    
+    
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) { //Removing images and animation
         
         DispatchQueue.main.async {
@@ -142,21 +256,21 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             self.imageView.isHidden = true
             self.imageView.layer.removeAllAnimations()
             self.label.isHidden = true
+            self.label2.isHidden = true
             self.refreshControl.endRefreshing()
-        }
-        if webView.canGoBack {
-            webView.scrollView.setContentOffset(CGPoint.zero, animated: true)
+            self.showToolbar()
+            self.toolBar = false
+            self.updateBackground()
         }
     }
     
-
     //MARK: - WebPage Methods
     
     override func loadView() {
         super.loadView()
         
         let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.navigationDelegate = self
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +281,9 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         webView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack), options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack), options: .new, context: nil) //Adding observers for the navigations
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.canGoForward), options: .new, context: nil)
+
     }
 
     func loadWebPage() {
@@ -182,37 +298,49 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             if let newValue = change?[.newKey] as? Bool {
                 updateBackButtonVisibility(canGoBack: newValue)
             }
+        } else if keyPath == #keyPath(WKWebView.canGoForward) {
+            if let newValue = change?[.newKey] as? Bool {
+                updateForwardButtonVisibility(canGoForward: newValue)
+            }
         }
     }
 
-    private func updateBackButtonVisibility(canGoBack: Bool) { //There is no back button in the main page
-        navigationController?.setNavigationBarHidden(!canGoBack, animated: false)
-
+    private func updateBackButtonVisibility(canGoBack: Bool) {
+        backButtonOutlet.isEnabled = canGoBack ? true : false
+        interfaceButton.isHidden = canGoBack ? true : false
+        updateBackground()
     }
-
+    
+    private func updateForwardButtonVisibility(canGoForward: Bool) {
+        forwardButtonOutlet.isEnabled = canGoForward ? true : false
+        updateBackground()
+    }
+    
+    
     deinit {
         // To prevent potential memory leaks when the view controller is deallocated
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.canGoBack))
     }
 
-    private func setUpBackButton() {
-        let backButton = UIButton(type: .custom)
-        backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        backButton.setTitleColor(.tintColor, for: .normal)
-        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+    //MARK: - Toolbar buttons
+    
+    @IBAction func backButton(_ sender: UIBarButtonItem) {
+        goBack()
     }
     
-    @objc private func goBack() {
+    @IBAction func forwardButton(_ sender: UIBarButtonItem) {
+        goForward()
+    }
     
+     private func goBack() {
         if self.webView.canGoBack {
-            UIView.transition(with: webView, duration: 0.6, options: .transitionFlipFromLeft, animations: {
+            UIView.transition(with: webView, duration: 0.6, options: .transitionFlipFromLeft, animations:  {
                 self.webView.goBack()
             }, completion: nil)
         }
     }
     
-    @objc private func goForward() {
+     private func goForward() {
         
         if self.webView.canGoForward {
             UIView.transition(with: webView, duration: 0.6, options: .transitionFlipFromRight, animations: {
@@ -221,12 +349,11 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         }
     }
     
-    private func setUpShareButton() {
-        let shareButton = UIButton(type: .custom)
-        shareButton.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
-        shareButton.setTitleColor(.tintColor, for: .normal)
-        shareButton.addTarget(self, action: #selector(shareUrl), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareButton)
+    
+    @IBAction func shareButton(_ sender: UIBarButtonItem) {
+        feedbackGenerator.impactOccurred()
+        shareUrl()
+        
     }
     
     @objc private func shareUrl() {
@@ -234,13 +361,10 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         if let currentURL = webView.url {
             let activityViewController = UIActivityViewController(activityItems: [currentURL], applicationActivities: nil)
             present(activityViewController, animated: true, completion: nil)
-            
         } else {
             print("url cannot be retrieved")
         }
     }
     
-    
-
     
 }

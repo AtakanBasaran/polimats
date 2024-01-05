@@ -7,23 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB22B0162B4458A100A53742 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB22B0152B4458A100A53742 /* Network.swift */; };
 		BB26FD772B3365D100A1814F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB26FD762B3365D100A1814F /* AppDelegate.swift */; };
 		BB26FD792B3365D100A1814F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB26FD782B3365D100A1814F /* SceneDelegate.swift */; };
 		BB26FD7B2B3365D100A1814F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB26FD7A2B3365D100A1814F /* ViewController.swift */; };
 		BB26FD7E2B3365D100A1814F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB26FD7C2B3365D100A1814F /* Main.storyboard */; };
 		BB26FD802B3365D200A1814F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB26FD7F2B3365D200A1814F /* Assets.xcassets */; };
-		BB26FD832B3365D200A1814F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB26FD812B3365D200A1814F /* LaunchScreen.storyboard */; };
+		BB6048582B3B68FB00BC9556 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB6048552B3B68FA00BC9556 /* Roboto-Bold.ttf */; };
+		BB6048592B3B68FB00BC9556 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB6048562B3B68FA00BC9556 /* Roboto-Regular.ttf */; };
+		BB60485A2B3B68FB00BC9556 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BB6048572B3B68FB00BC9556 /* Roboto-Medium.ttf */; };
+		BB8E91612B39F3DC00ABA6A1 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8E91602B39F3DC00ABA6A1 /* NotificationService.swift */; };
+		BB8E91652B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BB8E915E2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BB8E916D2B39F64D00ABA6A1 /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = BB8E916C2B39F64D00ABA6A1 /* OneSignalExtension */; };
+		BB8E916F2B39F64D00ABA6A1 /* OneSignalFramework in Frameworks */ = {isa = PBXBuildFile; productRef = BB8E916E2B39F64D00ABA6A1 /* OneSignalFramework */; };
+		BB8E91712B39F64D00ABA6A1 /* OneSignalInAppMessages in Frameworks */ = {isa = PBXBuildFile; productRef = BB8E91702B39F64D00ABA6A1 /* OneSignalInAppMessages */; };
+		BB8E91732B39F64D00ABA6A1 /* OneSignalLocation in Frameworks */ = {isa = PBXBuildFile; productRef = BB8E91722B39F64D00ABA6A1 /* OneSignalLocation */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BB8E91632B39F3DC00ABA6A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB26FD6B2B3365D100A1814F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BB8E915D2B39F3DC00ABA6A1;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BB8E91692B39F3DD00ABA6A1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BB8E91652B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		BB22B0152B4458A100A53742 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		BB26FD732B3365D100A1814F /* Polimats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polimats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26FD762B3365D100A1814F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB26FD782B3365D100A1814F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BB26FD7A2B3365D100A1814F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BB26FD7D2B3365D100A1814F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB26FD7F2B3365D200A1814F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BB26FD822B3365D200A1814F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB26FD842B3365D200A1814F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB6048552B3B68FA00BC9556 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		BB6048562B3B68FA00BC9556 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		BB6048572B3B68FB00BC9556 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		BB8E91392B397CF200ABA6A1 /* Polimats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Polimats.entitlements; sourceTree = "<group>"; };
+		BB8E915E2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB8E91602B39F3DC00ABA6A1 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		BB8E91622B39F3DC00ABA6A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB8E916A2B39F56100ABA6A1 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +72,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB8E91712B39F64D00ABA6A1 /* OneSignalInAppMessages in Frameworks */,
+				BB8E916F2B39F64D00ABA6A1 /* OneSignalFramework in Frameworks */,
+				BB8E91732B39F64D00ABA6A1 /* OneSignalLocation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB8E915B2B39F3DC00ABA6A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB8E916D2B39F64D00ABA6A1 /* OneSignalExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				BB26FD752B3365D100A1814F /* Polimats */,
+				BB8E915F2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension */,
 				BB26FD742B3365D100A1814F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				BB26FD732B3365D100A1814F /* Polimats.app */,
+				BB8E915E2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,9 +110,13 @@
 		BB26FD752B3365D100A1814F /* Polimats */ = {
 			isa = PBXGroup;
 			children = (
+				BB8E91392B397CF200ABA6A1 /* Polimats.entitlements */,
 				BB8E91332B36479500ABA6A1 /* Resources */,
 				BB8E91352B3647C600ABA6A1 /* View */,
 				BB26FD842B3365D200A1814F /* Info.plist */,
+				BB6048552B3B68FA00BC9556 /* Roboto-Bold.ttf */,
+				BB6048572B3B68FB00BC9556 /* Roboto-Medium.ttf */,
+				BB6048562B3B68FA00BC9556 /* Roboto-Regular.ttf */,
 			);
 			path = Polimats;
 			sourceTree = "<group>";
@@ -78,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				BB26FD7A2B3365D100A1814F /* ViewController.swift */,
+				BB22B0152B4458A100A53742 /* Network.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -86,9 +145,18 @@
 			isa = PBXGroup;
 			children = (
 				BB26FD7C2B3365D100A1814F /* Main.storyboard */,
-				BB26FD812B3365D200A1814F /* LaunchScreen.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BB8E915F2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				BB8E916A2B39F56100ABA6A1 /* OneSignalNotificationServiceExtension.entitlements */,
+				BB8E91602B39F3DC00ABA6A1 /* NotificationService.swift */,
+				BB8E91622B39F3DC00ABA6A1 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,15 +169,42 @@
 				BB26FD6F2B3365D100A1814F /* Sources */,
 				BB26FD702B3365D100A1814F /* Frameworks */,
 				BB26FD712B3365D100A1814F /* Resources */,
+				BB8E91692B39F3DD00ABA6A1 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB8E91642B39F3DC00ABA6A1 /* PBXTargetDependency */,
+			);
+			name = Polimats;
+			packageProductDependencies = (
+				BB8E916E2B39F64D00ABA6A1 /* OneSignalFramework */,
+				BB8E91702B39F64D00ABA6A1 /* OneSignalInAppMessages */,
+				BB8E91722B39F64D00ABA6A1 /* OneSignalLocation */,
+			);
+			productName = Polimats;
+			productReference = BB26FD732B3365D100A1814F /* Polimats.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BB8E915D2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB8E91662B39F3DD00ABA6A1 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				BB8E915A2B39F3DC00ABA6A1 /* Sources */,
+				BB8E915B2B39F3DC00ABA6A1 /* Frameworks */,
+				BB8E915C2B39F3DC00ABA6A1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Polimats;
-			productName = Polimats;
-			productReference = BB26FD732B3365D100A1814F /* Polimats.app */;
-			productType = "com.apple.product-type.application";
+			name = OneSignalNotificationServiceExtension;
+			packageProductDependencies = (
+				BB8E916C2B39F64D00ABA6A1 /* OneSignalExtension */,
+			);
+			productName = OneSignalNotificationServiceExtension;
+			productReference = BB8E915E2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -124,6 +219,9 @@
 					BB26FD722B3365D100A1814F = {
 						CreatedOnToolsVersion = 15.1;
 					};
+					BB8E915D2B39F3DC00ABA6A1 = {
+						CreatedOnToolsVersion = 15.1;
+					};
 				};
 			};
 			buildConfigurationList = BB26FD6E2B3365D100A1814F /* Build configuration list for PBXProject "Polimats" */;
@@ -135,11 +233,15 @@
 				Base,
 			);
 			mainGroup = BB26FD6A2B3365D100A1814F;
+			packageReferences = (
+				BB8E916B2B39F64D00ABA6A1 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+			);
 			productRefGroup = BB26FD742B3365D100A1814F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BB26FD722B3365D100A1814F /* Polimats */,
+				BB8E915D2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -149,9 +251,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BB26FD832B3365D200A1814F /* LaunchScreen.storyboard in Resources */,
 				BB26FD802B3365D200A1814F /* Assets.xcassets in Resources */,
+				BB60485A2B3B68FB00BC9556 /* Roboto-Medium.ttf in Resources */,
+				BB6048592B3B68FB00BC9556 /* Roboto-Regular.ttf in Resources */,
+				BB6048582B3B68FB00BC9556 /* Roboto-Bold.ttf in Resources */,
 				BB26FD7E2B3365D100A1814F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB8E915C2B39F3DC00ABA6A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,11 +275,28 @@
 			files = (
 				BB26FD7B2B3365D100A1814F /* ViewController.swift in Sources */,
 				BB26FD772B3365D100A1814F /* AppDelegate.swift in Sources */,
+				BB22B0162B4458A100A53742 /* Network.swift in Sources */,
 				BB26FD792B3365D100A1814F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BB8E915A2B39F3DC00ABA6A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB8E91612B39F3DC00ABA6A1 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BB8E91642B39F3DC00ABA6A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BB8E915D2B39F3DC00ABA6A1 /* OneSignalNotificationServiceExtension */;
+			targetProxy = BB8E91632B39F3DC00ABA6A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BB26FD7C2B3365D100A1814F /* Main.storyboard */ = {
@@ -177,14 +305,6 @@
 				BB26FD7D2B3365D100A1814F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BB26FD812B3365D200A1814F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BB26FD822B3365D200A1814F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -242,7 +362,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -299,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -312,50 +432,60 @@
 		BB26FD882B3365D200A1814F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Polimats/Polimats.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 27JCDAS664;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Polimats/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = polimats;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Size özel reklamlar göstermek için izin istiyoruz";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AtakanBasaran.Polimats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		BB26FD892B3365D200A1814F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Polimats/Polimats.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 27JCDAS664;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Polimats/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = polimats;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Size özel reklamlar göstermek için izin istiyoruz";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,6 +493,63 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AtakanBasaran.Polimats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		BB8E91672B39F3DD00ABA6A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 27JCDAS664;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AtakanBasaran.Polimats.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BB8E91682B39F3DD00ABA6A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 27JCDAS664;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AtakanBasaran.Polimats.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -390,7 +577,50 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		BB8E91662B39F3DD00ABA6A1 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB8E91672B39F3DD00ABA6A1 /* Debug */,
+				BB8E91682B39F3DD00ABA6A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BB8E916B2B39F64D00ABA6A1 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BB8E916C2B39F64D00ABA6A1 /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB8E916B2B39F64D00ABA6A1 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
+		};
+		BB8E916E2B39F64D00ABA6A1 /* OneSignalFramework */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB8E916B2B39F64D00ABA6A1 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalFramework;
+		};
+		BB8E91702B39F64D00ABA6A1 /* OneSignalInAppMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB8E916B2B39F64D00ABA6A1 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalInAppMessages;
+		};
+		BB8E91722B39F64D00ABA6A1 /* OneSignalLocation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BB8E916B2B39F64D00ABA6A1 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalLocation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BB26FD6B2B3365D100A1814F /* Project object */;
 }

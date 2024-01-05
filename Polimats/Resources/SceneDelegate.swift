@@ -10,6 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var savedShortCutItem: UIApplicationShortcutItem?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,6 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        if let shortcutItem = connectionOptions.shortcutItem { // get the shortCutItem here
+            savedShortCutItem = shortcutItem
+           }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -27,9 +32,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        
+        if savedShortCutItem != nil {
+            if savedShortCutItem!.type == "com.polimats.contactus" {
+                openMail()
+            } else {
+                print("wrong type")
+            }
     }
+}
+            
 
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
@@ -46,7 +58,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
+    
+    //MARK: - Quick Action
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        print("application")
+        handleShortcut(shortcutItem)
+        completionHandler(true) //quick action done successfully
+    }
+    
+    func handleShortcut(_ shortcutItem: UIApplicationShortcutItem) {
+        print("Handling shortcut: \(shortcutItem.type)")
+        if shortcutItem.type == "com.polimats.contactus" {
+            openMail()
+        } else {
+            print("wrong type")
+        }
+    }
+    
+    func openMail() {
+        print("Opening mail")
+        if let url = URL(string: "mailto:iletisim@polimats.com?subject=Destek%20Talebi") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
 }
 

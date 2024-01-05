@@ -17,10 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm6-KZ-Gyp">
-                                <rect key="frame" x="16" y="475" width="361" height="111"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm6-KZ-Gyp">
+                                <rect key="frame" x="16" y="567" width="361" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="22"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="075-K2-O1b">
+                                <rect key="frame" x="16" y="462" width="357" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -28,9 +35,40 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem image="chevron.backward" catalog="system" id="7aQ-uh-FJE">
+                            <connections>
+                                <action selector="backButton:" destination="BYZ-38-t0r" id="w8g-zl-zJZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="fixedSpace" id="AtO-d0-WcZ"/>
+                        <barButtonItem image="chevron.right" catalog="system" width="62.666666666666664" id="Usz-bE-r2C">
+                            <connections>
+                                <action selector="forwardButton:" destination="BYZ-38-t0r" id="mGP-H2-AeU"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Y1N-iR-dAP"/>
+                        <barButtonItem title="Item" image="circle.lefthalf.filled" catalog="system" id="wK5-hZ-buc">
+                            <connections>
+                                <action selector="changeInterface:" destination="BYZ-38-t0r" id="DhR-5L-DLM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="mPa-aQ-GFm"/>
+                        <barButtonItem image="square.and.arrow.up" catalog="system" id="L92-Oo-r94">
+                            <connections>
+                                <action selector="shareButton:" destination="BYZ-38-t0r" id="3gb-h5-e0c"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="sMM-Dv-ZJ3"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButtonOutlet" destination="7aQ-uh-FJE" id="JZn-S2-ZOk"/>
+                        <outlet property="forwardButtonOutlet" destination="Usz-bE-r2C" id="22D-Fj-Arl"/>
+                        <outlet property="interfaceButton" destination="wK5-hZ-buc" id="JEB-k8-BTh"/>
                         <outlet property="label" destination="rm6-KZ-Gyp" id="Pbt-8t-Y8H"/>
+                        <outlet property="label2" destination="075-K2-O1b" id="dc6-uU-CJ1"/>
+                        <outlet property="shareButtonOutlet" destination="L92-Oo-r94" id="CLx-ab-HXR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -40,16 +78,19 @@
         <!--Navigation Controller-->
         <scene sceneID="klN-U8-I41">
             <objects>
-                <navigationController id="1YC-ed-0dp" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" toolbarHidden="NO" id="1YC-ed-0dp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uhM-ba-PDp">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IBZ-Nv-haF">
+                        <rect key="frame" x="0.0" y="769" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="nNE-eo-P3Z"/>
                     </connections>
@@ -60,6 +101,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
+        <image name="circle.lefthalf.filled" catalog="system" width="128" height="123"/>
+        <image name="square.and.arrow.up" catalog="system" width="108" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
