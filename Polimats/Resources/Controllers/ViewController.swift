@@ -3,6 +3,7 @@ import WebKit
 import UserNotifications
 import Network
 
+
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var label: UILabel!
@@ -20,7 +21,7 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UISc
     private var refreshControl = UIRefreshControl()
     private var toolBar = true
     var network = Network()
-    let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
     
     
     override func viewDidLoad() {
@@ -37,8 +38,8 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UISc
         hideToolbar()
         backButtonOutlet.isEnabled = false
         forwardButtonOutlet.isEnabled = false
-        
     }
+    
     
     //MARK: - Check Connection
     

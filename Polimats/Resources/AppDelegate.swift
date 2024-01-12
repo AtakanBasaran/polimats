@@ -10,6 +10,7 @@ import UserNotifications
 import OneSignalFramework
 import MessageUI
 
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,11 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Remove this method to stop OneSignal Debugging
         OneSignal.Debug.setLogLevel(.LL_VERBOSE)
-        OneSignal.setConsentGiven(true)
+        OneSignal.setConsentRequired(false)
+        OneSignal.Location.isShared = true
       // OneSignal initialization
         OneSignal.initialize("22f4ef60-a8a4-4c08-8a3e-14f9ed5927c6", withLaunchOptions: launchOptions)
+       
       // requestPermission will show the native iOS notification permission prompt.
-        OneSignal.Location.requestPermission()
       // We recommend removing the following code and instead using an In-App Message to prompt for notification permission
         OneSignal.Notifications.requestPermission({ accepted in
           print("User accepted notifications: \(accepted)")
@@ -32,9 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-    
-    
-        
     
     // MARK:  - UISceneSession Lifecycle
 

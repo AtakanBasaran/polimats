@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Konumunuzu kullanarak mevcut konumunuz ile ilgili bilgileri sağlıyoruz</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Konumunuzu kullanarak mevcut konumunuz ile ilgili bilgileri sağlıyoruz</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Size özel bildirimler göstermek için sizi takip etmek istiyoruz</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Konumunuzu kullanarak mevcut konumunuz ile ilgili bilgileri sağlıyoruz</string>
+	<string>Konumunuzla ilgili bildirimler göndermek için konumunuzu kullanmak istiyoruz</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>CFBundleIdentifier</key>

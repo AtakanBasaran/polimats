@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AppTrackingTransparency
+import OneSignalFramework
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -32,6 +34,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            
+            ATTrackingManager.requestTrackingAuthorization { status in
+                
+                switch status {
+                case .authorized:
+                    OneSignal.setConsentGiven(true)
+                    print("accept")
+                case .denied:
+                    print("denied")
+                    OneSignal.setConsentGiven(false)
+                case .notDetermined:
+                    OneSignal.setConsentGiven(false)
+                    print("not determined")
+                case .restricted:
+                    OneSignal.setConsentGiven(false)
+                    print("restricted")
+                @unknown default:
+                    print("unkown")
+                }
+            }
+        })
         
         if savedShortCutItem != nil {
             if savedShortCutItem!.type == "com.polimats.contactus" {
